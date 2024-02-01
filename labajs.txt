@@ -1,0 +1,357 @@
+﻿<---------------------------------------------------------p1--------------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+<title>
+Angular JS Full Name Pgm
+</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("myApp",[]);
+app.controller("myCntrl",function($scope){
+$scope.firstName="Harish Kumar"
+$scope.lastName="B T"
+});
+</script>
+</head>
+<body ng-app="myApp">
+<h2>Anjular JS Application to Display Full Name</h2>
+<div ng-controller="myCntrl">
+Enter First Name: <input type="text" ng-model="firstName"><br/>
+Enter Last Name: <input type="text" ng-model="lastName"><br/>
+Your Full Name: {{firstName +" "+ lastName}}
+</div>
+</body>
+</html>
+
+
+<-----------------------------------------------p2---------------------------------------------------------->
+<!DOCTYPE html>
+<html>
+<title>
+Shopping Items Application
+</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("myApp",[]);
+app.controller("myCntrl",function($scope){
+$scope.shoppingItems=['Apple','Mango','Banana','Grapes']
+$scope.addItem=function(){
+if($scope.newItem && $scope.shoppingItems.indexOf($scope.newItem)==-1)
+{
+$scope.shoppingItems.push($scope.newItem)
+$scope.newItem=""
+}
+else
+{
+if($scope.newItem)
+alert("This item is already there in the shopping list")
+else
+alert("Please enter an item to add")
+}
+}
+$scope.removeItem=function(){
+//console.log("function called")
+if($scope.shoppingItems.indexOf($scope.selectItem)==-1)
+{
+alert("Please select an item to remove")
+}
+else{
+var index=$scope.shoppingItems.indexOf($scope.selectItem)
+$scope.shoppingItems.splice(index,1)
+$scope.selectItem=""
+}
+}
+});
+</script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="myCntrl">
+<h2>Shopping Application</h2>
+<h4>List of Shopping Items</h4>
+<table border="1">
+<tr>
+<th>SLNO</th>
+<th>Item</th>
+</tr>
+<tr ng-repeat="items in shoppingItems">
+<td>{{$index+1}}</td>
+<td>{{items}}</td>
+</tr>
+</table>
+<br/>
+<div>
+Enter an Item to Add: <input type="text" ng-model="newItem">
+<button ng-click="addItem()">Add Item</button>
+</div>
+<div>
+Select an Item to Remove:
+<select ng-model="selectItem" ng-options="item for item in shoppingItems"></select>
+<button ng-click="removeItem()">Remove Item</button>
+</div>
+</div>
+</body>
+</html>
+
+
+
+
+<----------------------------------------p3--------------------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+<title>
+AJS Simple Calculator
+</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("calcApp",[]);
+app.controller("calcCntrl",function($scope)
+{
+$scope.num1=0
+$scope.num2=0
+$scope.result=0
+$scope.operator="add"
+$scope.compute=function(){
+switch($scope.operator){
+case 'add': $scope.result=$scope.num1 + $scope.num2
+break
+case 'sub': $scope.result=$scope.num1 - $scope.num2
+break
+case 'mul': $scope.result=$scope.num1 * $scope.num2
+break
+case 'div': if($scope.num2==0){
+alert("Divide by zero error")
+}
+else{
+$scope.result=$scope.num1/$scope.num2
+}}}
+});
+</script>
+</head>
+<body ng-app="calcApp">
+<h1>Angular JS Simple Calculator</h1>
+<div ng-controller="calcCntrl">
+Enter First Number: <input type="number" ng-model="num1">
+Select Operator:<select ng-model="operator">
+<option value="add">+</option>
+<option value="sub">-</option>
+<option value="mul">*</option>
+<option value="div">/</option>
+</select>
+Enter Second Number:<input type="number" ng-model="num2">
+<button ng-click="compute()">Compute</button>
+<br/>
+<b>{{num1 + " "+operator+ " "+ num2+ "="+result}}</b>
+</div>
+</body>
+</html>
+
+
+
+
+<---------------------------------------------------------p4---------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+<title>
+AJS Square and Factorial Application
+</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("mySqFct", []);
+app.controller("mySqFctCntrl", function($scope){
+$scope.num=0
+$scope.result
+$scope.factorial=function()
+{
+if($scope.num==0)
+{
+$scope.result=1
+}
+else{
+$scope.fact=1
+for(var i=$scope.num; i>=1; i--)
+{
+$scope.fact=$scope.fact*i
+}
+$scope.result=$scope.fact
+}
+}
+$scope.square=function(){
+$scope.result=$scope.num*$scope.num
+}
+});
+</script>
+</head>
+<body ng-app="mySqFct">
+<h1> Angular JS Factorial and Square Application</h1>
+<div ng-controller="mySqFctCntrl">
+Enter the Number: <input type="number" ng-model="num">
+<button ng-click="factorial()">Compute Factorial</button>
+<button ng-click="square()">Compute Square</button>
+<br/>
+{{result}}
+</div>
+</body>
+</html>
+
+
+
+
+<-----------------------------------------------------p5--------------------------------------------------------->
+
+
+<!DOCTYPE html>
+<html>
+<title>Student Details Application</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("studDetailsApp",[]);
+app.controller("studDetailsAppCntrl",function($scope){
+$scope.studData=[]
+$scope.generateData=function()
+{
+$scope.studData=[]
+for(var i=1;i<=$scope.num;i++)
+{
+var stud={
+"SLNO":i,
+"NAME":'Student-'+i,
+"CGPA":(Math.random()*10+1).toFixed(2)
+}
+$scope.studData.push(stud)
+}
+}
+});
+</script>
+</head>
+<body ng-app="studDetailsApp">
+<h1>Student Details Application</h1>
+<div ng-controller="studDetailsAppCntrl">
+Enter the Number of Students to Generate the Data:
+<input type="number" ng-model="num">
+<button ng-click="generateData()">Generate</button>
+<br/>
+<table border="1" ng-show="studData.length>0">
+<tr>
+<th>SLNO</th>
+<th>NAME</th>
+<th>CGPA</th>
+</tr>
+<tr ng-repeat="student in studData">
+<td>{{student.SLNO}}</td>
+<td>{{student.NAME}}</td>
+<td>{{student.CGPA}}</td>
+</tr>
+</table>
+<br/>
+Number of Students={{studData.length}}
+</div>
+</body>
+</html>
+
+
+
+
+<-----------------------------------------------------p6------------------------------------------------------>
+
+
+<!DOCTYPE html>
+<html>
+<title>TO DO Application</title>
+<head>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js">
+</script>
+<script>
+var app=angular.module("toDoApp",[]);
+app.controller("toDoAppCntrl",function($scope){
+$scope.tasks=[
+{'TITLE':'Task-1','COMPLETED':true,'EDITING':false},
+{'TITLE':'Task-2','COMPLETED':false,'EDITING':false},
+{'TITLE':'Task-3','COMPLETED':false,'EDITING':false}
+]
+$scope.addTask=function(){
+if($scope.newTask)
+{
+var t={
+'TITLE':$scope.newTask,
+'COMPLETED':false,
+'EDITING':false
+}
+$scope.tasks.push(t)
+}
+else{
+alert("Please enter the task to add")
+}
+}
+$scope.editTask=function(task)
+{
+task.EDITING=true
+}
+$scope.turnOffEditing=function(task){
+task.EDITING=false
+}
+$scope.deleteTask=function(task)
+var index=$scope.tasks.indexOf(task)
+$scope.tasks.splice(index,1)
+}
+});
+</script>
+</head>
+<body ng-app="toDoApp">
+<h1>TO DO APPLICATION</h1>
+<div ng-controller="toDoAppCntrl">
+Enter the name of the Task:
+<input type="text" ng-model="newTask">
+<button ng-click="addTask()">Add Task</button>
+<br/>
+<br/>
+<table border="1">
+<tr>
+<th>SLNO</th>
+<th>Status</th>
+<th>Task</th>
+<th>Edit</th>
+<th>Delete</th>
+</tr>
+<tr ng-repeat="task in tasks">
+<td>{{$index+1}}</td>
+<td>
+<input type="checkbox" ng-model="task.COMPLETED">
+</td>
+<td>
+<span ng-show="!task.EDITING">{{task.TITLE}}</span>
+<input type="text" ng-show="task.EDITING"
+ng-model="task.TITLE" ng- blur="turnOffEditing(task)">
+</td>
+<td>
+<button ng-click="editTask(task)">Edit</button>
+</td>
+<td>
+<button ng-click="deleteTask(task)">Delete</button>
+</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
